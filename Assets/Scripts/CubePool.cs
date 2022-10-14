@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,27 +5,23 @@ public class CubePool
 {
     private const byte DEFAULT_CUBE_POOL = 5;
     private const string POOL_NAME = "CUBES_POOL";
-        
+
     private List<Cube> _cubes = new();
-        
+
     private Transform _poolParent;
-        
+
     private CubeFactory _cubeFactory;
 
     public Transform PoolParent => _poolParent;
-
+    
     public CubePool(Transform poolParent, Cube cube)
     {
-        _poolParent = new GameObject(POOL_NAME).transform;
-        _poolParent.SetParent(poolParent);
-        _poolParent.transform.position = poolParent.position;
+        CreatePoolWithPrefab(poolParent, cube);
+    }
 
-        _cubeFactory = new CubeFactory(cube);
-
-        for (int i = 0; i < DEFAULT_CUBE_POOL; i++)
-        {
-            CreateCube();
-        }
+    public CubePool(Transform poolParent)
+    {
+        CreatePoolWithPrefab(poolParent, null);
     }
 
     public List<Cube> GetPool()
@@ -58,6 +53,20 @@ public class CubePool
         cube.gameObject.SetActive(false);
         cube.transform.SetParent(_poolParent);
         cube.transform.position = _poolParent.position;
+    }
+    
+    private void CreatePoolWithPrefab(Transform poolParent, Cube cube)
+    {
+        _poolParent = new GameObject(POOL_NAME).transform;
+        _poolParent.SetParent(poolParent);
+        _poolParent.transform.position = poolParent.position;
+
+        _cubeFactory = cube is null ? new CubeFactory() : new CubeFactory(cube);
+
+        for (int i = 0; i < DEFAULT_CUBE_POOL; i++)
+        {
+            CreateCube();
+        }
     }
 
     private Cube CreateCube()
