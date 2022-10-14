@@ -22,18 +22,16 @@ public class Game : MonoBehaviour
 
     private void Awake()
     {
+        ParseParameters();
         _cubePool = new CubePool(transform);
-        _cubeMove = new CubeMove(_cubePool);
+        _cubeMove = new CubeMove(_cubePool, _speed, _distance);
     }
 
     private void Update()
     {
         if (Input.GetKeyUp(KeyCode.Return))
         {
-            _speed = float.TryParse(_cubeSpeedInput.text, out _speed) ? _speed : 10f;
-            _distance = float.TryParse(_cubeDistanceInput.text, out _distance) ? _distance : 10f;
-            _spawnTime = float.TryParse(_cubeSpawnTimeInput.text, out _spawnTime) ? _spawnTime : 10f;
-
+            ParseParameters();
             _cubeMove.SetParameters(_speed, _distance);
         }
     }
@@ -41,5 +39,12 @@ public class Game : MonoBehaviour
     private void FixedUpdate()
     {
         _cubeMove.MoveCube();
+    }
+
+    private void ParseParameters()
+    {
+        _speed = float.TryParse(_cubeSpeedInput.text, out _speed) ? _speed : 10f;
+        _distance = float.TryParse(_cubeDistanceInput.text, out _distance) ? _distance : 10f;
+        _spawnTime = float.TryParse(_cubeSpawnTimeInput.text, out _spawnTime) ? _spawnTime : 10f;
     }
 }

@@ -10,14 +10,11 @@ public class CubeMove
     private float _speed;
     private float _distance;
 
-    public CubeMove(CubePool cubePool)
-    {
-        InstantiateMove(cubePool, 10f, 100f);
-    }
-
     public CubeMove(CubePool cubePool, float speed, float distance)
     {
-        InstantiateMove(cubePool, speed, distance);
+        SetParameters(speed, distance);
+        _cubePool = cubePool.GetPool();
+        _startPosition = cubePool.PoolParent.transform;
     }
 
     public void SetParameters(float speed, float distance)
@@ -37,12 +34,5 @@ public class CubeMove
                 
             }
         }
-    }
-
-    private void InstantiateMove(CubePool cubePool, float speed, float distance)
-    {
-        SetParameters(speed, distance);
-        _cubePool = cubePool.GetPool();
-        _startPosition = cubePool.PoolParent.transform;
     }
 }
