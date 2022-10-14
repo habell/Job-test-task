@@ -13,7 +13,7 @@ public class CubePool
     private CubeFactory _cubeFactory;
 
     public Transform PoolParent => _poolParent;
-    
+
     public CubePool(Transform poolParent, Cube cube)
     {
         CreatePoolWithPrefab(poolParent, cube);
@@ -54,7 +54,7 @@ public class CubePool
         cube.transform.SetParent(_poolParent);
         cube.transform.position = _poolParent.position;
     }
-    
+
     private void CreatePoolWithPrefab(Transform poolParent, Cube cube)
     {
         _poolParent = new GameObject(POOL_NAME).transform;

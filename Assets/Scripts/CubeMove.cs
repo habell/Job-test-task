@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 public class CubeMove

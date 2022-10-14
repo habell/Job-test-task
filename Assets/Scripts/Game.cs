@@ -1,7 +1,5 @@
-using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 public class Game : MonoBehaviour
 {
@@ -40,7 +38,7 @@ public class Game : MonoBehaviour
     private void FixedUpdate()
     {
         _spawnTimerCount -= Time.fixedDeltaTime;
-        if(_spawnTimerCount <= 0) SpawnCube();
+        if (_spawnTimerCount <= 0) SpawnCube();
         _cubeMove.MoveCube();
     }
 
